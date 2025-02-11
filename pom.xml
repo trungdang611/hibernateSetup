@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>mybook</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>mybook</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- Sử dụng để viết unit test-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.11.4</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Để mock (gỉa lập đối tượng) -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.15.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Cung cấp các tính năng ORM-->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.6.0.Final</version>
+    </dependency>
+
+    <!-- Cung cấp driver JDBC để kết nối với cơ sở dữ liệu MySQL-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.33</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.34</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--
+        Hibernate Validator là thư viện chính để thực hiện việc xác thực các đối tượng Java.
+        Cung cấp các chú thích như @NotNull, @Size, @Min, @Max, v.v., để áp dụng các quy tắc xác thực dữ liệu
+        -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>8.0.1.Final</version>
+    </dependency>
+
+    <!--
+       Hibernate Validator CDI được sử dụng để tích hợp Hibernate Validator với CDI (Contexts and Dependency Injection).
+      Cho phép quản lý vòng đời của các bean, tiêm phụ thuộc (dependency injection).
+    -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator-cdi</artifactId>
+      <version>8.0.1.Final</version>
+    </dependency>
+
+    <!--
+     EL cho phép bạn viết các biểu thức động có thể được đánh giá tại thời gian chạy (runtime),
+     giúp bạn thao tác dữ liệu và đối tượng một cách linh hoạt hơn.
+    -->
+    <dependency>
+      <groupId>jakarta.el</groupId>
+      <artifactId>jakarta.el-api</artifactId>
+      <version>6.0.1</version>
+    </dependency>
+
+    <!-- Một triển khai cụ thể của Jakarta EL API -->
+    <dependency>
+      <groupId>org.glassfish.expressly</groupId>
+      <artifactId>expressly</artifactId>
+      <version>5.0.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Plugin để biên dịch mã nguồn -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>17</source> <!-- Phiên bản Java sử dụng -->
+          <target>17</target> <!-- Phiên bản Java biên dịch -->
+        </configuration>
+      </plugin>
+
+      <!-- Plugin để tạo file JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

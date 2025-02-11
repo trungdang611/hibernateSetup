@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Cài đặt kết nối cơ sở dữ liệu JDBC -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dbormassignment02?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf8</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+
+        <!-- Chỉ định Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Hiển thị tất cả các câu lệnh SQL thực thi ra console -->
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- Xử lý schema cơ sở dữ liệu khi khởi động -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Anh xa-->
+        <mapping class="com.example.entity.Author" />
+
+        <mapping class="com.example.entity.Book" />
+    </session-factory>
+</hibernate-configuration>
