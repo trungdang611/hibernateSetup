@@ -34,7 +34,7 @@ public class Author {
     @NotNull ( message = "Years of experience cannot be empty!")
     @Min( value = 6, message = "Years of experience must be greater than or equal to 0!")
     @Column( name = "experience_years", nullable = false )
-    private String experienceYears;
+    private int experienceYears;
 
     @Column( name = "skills")
     private String skills;
@@ -45,6 +45,14 @@ public class Author {
 
     @OneToMany( mappedBy = "author", fetch = FetchType.LAZY )
     private List<Book> bookList;
+
+    public Author(int authorId, String authorName, int experienceYears, String skills, String email) {
+        this.authorId = authorId;
+        this.authorName = authorName;
+        this.experienceYears = experienceYears;
+        this.skills = skills;
+        this.email = email;
+    }
 
     @Override
     public String toString() {

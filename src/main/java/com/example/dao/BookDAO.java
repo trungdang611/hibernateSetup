@@ -33,7 +33,7 @@ public interface BookDAO {
 
     List<BookCountDTO> findTotalQuantityBooksByAuthor();
 
-    long findTotalQuantityBooksByAuthorId(int authorId);
+    Long findTotalQuantityBooksByAuthorId(int authorId);
 
     List<Book> findBooksWithZeroPriceOrZeroQuantity();
 

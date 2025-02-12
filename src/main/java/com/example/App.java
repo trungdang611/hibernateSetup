@@ -2,10 +2,13 @@ package com.example;
 
 import com.example.dao.AuthorDAOImpl;
 import com.example.dao.BookDAOImpl;
+import com.example.dto.BookCountDTO;
 import com.example.entity.Author;
 import com.example.entity.Book;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -13,9 +16,9 @@ public class App {
         BookDAOImpl bookDAO = new BookDAOImpl();
 
 //      Tạo tác giả
-        Author author1 = new Author(0, "Nguyễn Nhật Ánh", "30", "Văn học thiếu nhi, truyện dài", "nguyen.nhat.anh@example.com", null);
-        Author author2 = new Author(0, "Nam Cao", "40", "Truyện ngắn, tiểu thuyết", "nam.cao@example.com", null);
-        Author author3 = new Author(0, "Ngô Tất Tố", "35", "Hiện thực phê phán", "ngo.tat.to@example.com", null);
+        Author author1 = new Author(0, "Nguyễn Nhật Ánh", 30, "Văn học thiếu nhi, truyện dài", "nguyen.nhat.anh@example.com", null);
+        Author author2 = new Author(0, "Nam Cao", 40, "Truyện ngắn, tiểu thuyết", "nam.cao@example.com", null);
+        Author author3 = new Author(0, "Ngô Tất Tố", 35, "Hiện thực phê phán", "ngo.tat.to@example.com", null);
 
         System.out.println(authorDAO.save(author1));
         System.out.println(authorDAO.save(author2));
@@ -45,5 +48,22 @@ public class App {
         System.out.println(bookDAO.save(book9));
         System.out.println(bookDAO.save(book10));
         System.out.println(bookDAO.save(book11));
+
+//        test query
+        List<BookCountDTO> bookCountDTOList = new ArrayList<BookCountDTO>();
+
+//        findBookCountByAuthor
+//        bookCountDTOList = bookDAO.findBookCountByAuthor();
+//        System.out.println(bookCountDTOList);
+
+//        findTotalQuantityBooksByAuthor
+//        bookCountDTOList = bookDAO.findTotalQuantityBooksByAuthor();
+//        System.out.println(bookCountDTOList);
+
+//        findTotalQuantityBooksByAuthorId
+//        Long total = bookDAO.findTotalQuantityBooksByAuthorId(1);
+//        System.out.println(total);
+
+
     }
 }

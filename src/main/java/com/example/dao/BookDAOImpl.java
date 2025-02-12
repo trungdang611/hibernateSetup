@@ -217,26 +217,148 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<BookCountDTO> findTotalQuantityBooksByAuthor() {
-        return List.of();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            // HQL query tính tổng số lượng sách theo tác giả
+            String hql = """
+                select new com.example.dto.BookCountDTO(a.authorName, sum(b.quantity))
+                from Author a
+                left join Book b on a.authorId = b.author.authorId
+                group by a.authorId
+                """;
+
+            // Tạo query và chỉ định kiểu trả về là BookCountDTO
+            Query<BookCountDTO> query = session.createQuery(hql, BookCountDTO.class);
+
+            // Trả về kết quả
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return null;
     }
 
     @Override
-    public long findTotalQuantityBooksByAuthorId(int authorId) {
-        return 0;
+    public Long findTotalQuantityBooksByAuthorId(int authorId) {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            String hql = """
+                    select sum(b.quantity)
+                    from Book b
+                    where b.author.authorId = :authorId
+                    """;
+            Query<Long> query = session.createQuery(hql);
+            query.setParameter("authorId", authorId);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("findTotalQuantityBooksByAuthorId error!");
+        } finally {
+            if (session != null) {
+                session.close();
+                System.out.println("findTotalQuantityBooksByAuthorId success!");
+            }
+        }
+        return null;
     }
 
     @Override
     public List<Book> findBooksWithZeroPriceOrZeroQuantity() {
-        return List.of();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            // HQL query tìm sách có giá bằng 0 hoặc số lượng bằng 0
+            String hql = """
+                from Book b
+                where b.price = 0 or b.quantity = 0
+                """;
+
+            // Tạo query và trả về danh sách các cuốn sách
+            Query<Book> query = session.createQuery(hql, Book.class);
+
+            // Trả về danh sách các cuốn sách
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("findBooksWithZeroPriceOrZeroQuantity error!");
+        } finally {
+            if (session != null) {
+                session.close();
+                System.out.println("findBooksWithZeroPriceOrZeroQuantity success!");
+            }
+        }
+        return null;
     }
 
     @Override
     public List<Book> findBooksByPriceRange(double minPrice, double maxPrice) {
-        return List.of();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            // HQL query tìm sách có giá nằm trong phạm vi từ minPrice đến maxPrice
+            String hql = """
+                from Book b
+                where b.price between :minPrice and :maxPrice
+                """;
+
+            // Tạo query và thiết lập tham số minPrice và maxPrice
+            Query<Book> query = session.createQuery(hql, Book.class);
+            query.setParameter("minPrice", minPrice);
+            query.setParameter("maxPrice", maxPrice);
+
+            // Trả về danh sách các cuốn sách trong phạm vi giá
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("findBooksByPriceRange error!");
+        } finally {
+            if (session != null) {
+                session.close();
+                System.out.println("findBooksByPriceRange success!");
+            }
+        }
+        return null;
     }
 
     @Override
     public List<Author> findTop3AuthorsWithMostBooks() {
-        return List.of();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            // HQL query tìm 3 tác giả có số lượng sách nhiều nhất
+            String hql = """
+                select a
+                from Author a
+                left join a.bookList b
+                group by a.authorId
+                order by count(b.bookId) desc
+                """;
+
+            // Tạo query và chỉ lấy 3 kết quả đầu tiên
+            Query<Author> query = session.createQuery(hql, Author.class);
+            query.setMaxResults(3);
+
+            // Trả về danh sách 3 tác giả có số lượng sách nhiều nhất
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("findTop3AuthorsWithMostBooks error!");
+        } finally {
+            if (session != null) {
+                session.close();
+                System.out.println("findTop3AuthorsWithMostBooks success!");
+            }
+        }
+        return null;
     }
 }
