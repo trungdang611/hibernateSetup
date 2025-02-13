@@ -57,6 +57,6 @@ public class Author {
     @Override
     public String toString() {
         return "Author[" + authorId + ", " + authorName + ", "
-                + experienceYears + ", " + skills + ", " + email + "]";
+                + experienceYears + ", " + skills + ", " + email + "]\n" ;
     }
 }
